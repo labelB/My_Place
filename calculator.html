@@ -1,0 +1,50 @@
+<!DOCTYPE html><html><head lang="en">    <meta charset="UTF-8">    <title></title>    <style type="text/css">        * {            margin: 0;            padding: 0;            font: bold 14px Arial, sans-serif;        }        html {            height: 100%;            background: radial-gradient(circle, #fff 20%, #cc6ab0);        }        #calculator {            width: 325px;            height: auto;            margin: 100px auto;            padding: 20px 20px 9px;            background: #9dd2ea;            background: linear-gradient(#9dd2ea, #8bceec);            border-radius: 3px;            box-shadow: 0 4px #009de4,0 10px 15px rgba(0, 0, 0, 0.2);        }        .top span.clear {            float: left;        }        .top .screen {            height: 40px;            width: 212px;            float: right;            padding: 0 10px;            background: rgba(0, 0, 0, 0.2);            border-radius: 3px;            box-shadow: inset 0 4px rgba(0, 0, 0, 0.2);            font-size: 17px;            line-height: 40px;            color: white;            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);            text-align: right;            letter-spacing: 1px;        }        .keys, .top {            display: inline-block;        }        .keys span, .top span.clear {            float: left;            position: relative;            top: 0;            cursor: pointer;            width: 66px;            height: 36px;            background: white;            border-radius: 3px;            box-shadow: 0 4px rgba(0, 0, 0, 0.2);            margin: 0 7px 11px 0;            color: #888;            line-height: 36px;            text-align: center;            transition: all 0.2s ease;        }        .keys span.operator {            background: #FFF0F5;            margin-right: 0;        }        .keys span.eval {            background: #f1ff92;            box-shadow: 0 4px #9da853;            color: #888e5f;        }        .top span.clear {            background: #ff9fa8;            box-shadow: 0px 4px #ff7c87;            color: white;        }        .keys span:hover {            background: #9c89f6;            box-shadow: 0 4px #6b54d3;            color: white;        }        .keys span.eval:hover {            background: #abb850;            box-shadow: 0 4px #717a33;            color: #ffffff;        }        .top span.clear:hover {            background: #f68991;            box-shadow: 0 4px #d3545d;            color: white;        }        .keys span:active {            box-shadow: 0 0 #6b54d3;            top: 4px;        }        .keys span.eval:active {            box-shadow: 0 0 #717a33;            top: 4px;        }        .top span.clear:active {            top: 4px;            box-shadow: 0 0 #d3545d;        }        .radix{            color: #25848e;            padding: 5px 0;        }        .radix [type="radio"],.radix label{            cursor: pointer;        }    </style></head><body><div id="calculator">    <div class="top">        <span class="clear" id="clean">C</span>        <div class="screen" id="scr"></div>    </div>    <div class="keys">        <span id='b7'>7</span>        <span id='b8'>8</span>        <span id='b9'>9</span>        <span class="operator" id='op1'>+</span>        <span id='b4'>4</span>        <span id='b5'>5</span>        <span id='b6'>6</span>        <span class="operator" id='op2'>-</span>        <span id='b1'>1</span>        <span id='b2'>2</span>        <span id='b3'>3</span>        <span class="operator" id='op3'>÷</span>        <span id='b0'>0</span>        <span id="dian">.</span>        <span class="eval" id="jisuan">=</span>        <span class="operator" id='op4'>x</span>    </div></div>  </body>
+<script type="text/javascript">
+	var btn=[];
+	var b=false;
+	var op;
+	var op1;
+	var eq=document.getElementById('jisuan');
+	var point=document.getElementById('dian');
+	var cleanobj=document.getElementById('clean');
+	cleanobj.onclick=function(){
+		scr.innerHTML='';
+		op='';
+		op1='';
+	}
+	point.onclick=function(){
+		if(scr.innerHTML.indexOf('.')){
+			scr.innerHTML+='.';
+		}
+	}
+	for(var i=0;i<=9;i++){
+		btn[i]=document.getElementById('b'+i);
+		btn[i].onclick=function(){
+			if(b){
+				scr.innerHTML='';
+				b=false;
+			}
+			scr.innerHTML+=this.innerHTML;
+		}
+	}
+	for(var j=1;j<=4;j++){
+		document.getElementById('op'+j).onclick=function(){
+			b=true;
+			op1=scr.innerHTML;
+			op=this.id;
+		}
+		eq.onclick=function(){
+			var op2=scr.innerHTML;
+			switch (op){
+				case 'op1':scr.innerHTML=Number(op1)+Number(op2);
+				break;
+				case 'op2':scr.innerHTML=Number(op1)-Number(op2);
+				break;
+				case 'op3':scr.innerHTML=Number(op1)/Number(op2);
+				break;
+				case 'op4':scr.innerHTML=Number(op1)*Number(op2);
+				break;
+			}
+		}
+	}
+</script></html>
