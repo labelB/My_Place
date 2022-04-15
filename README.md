@@ -1,2 +1,1 @@
-# web
-study
+# my place
