@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				background-color: black;
+			}
+			#scr{
+				width: 726px;
+				height: 91px;
+				margin: 1.25rem auto;
+			}
+			#btn{
+				width: 422px;
+				height: 88px;
+				margin: 0 auto;
+				
+			}
+			#btn img{
+				margin-right: 75px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="scr">
+		<img src="img/0.png" alt="" id='img1'>
+		<img src="img/0.png" alt="" id='img2'>
+		<img src="img/dian.png" alt="">
+		<img src="img/0.png" alt="" id='img3'>
+		<img src="img/0.png" alt="" id='img4'>
+		<img src="img/dian.png" alt="">
+		<img src="img/0.png" alt="" id='img5'>
+		<img src="img/0.png" alt="" id='img6'>
+		<img src="img/dian.png" alt="">
+		<img src="img/0.png" alt="" id='img7'>
+		<img src="img/0.png" alt="" id='img8'>
+		</div>
+		<div id="btn">
+			<img src=img/ks.png alt="" id="start">
+			<img src="img/zt.png" alt="" id="stop">
+			<img style="margin-right:0;" src="img/tz.png" id="re">
+		</div>
+	</body>
+	<script type="text/javascript">
+		var imgarr=[];
+		var startobj=document.getElementById('start');
+		var stopobj=document.getElementById('stop');
+		var reobj=document.getElementById('re');
+		var num=0;
+		var s=0;
+		var m=0;
+		var h=0;
+		var mm=0;
+		var b=true;
+		var timer
+		for(var i=1;i<=8;i++){
+			imgarr[i]=document.getElementById('img'+i);
+		}
+		startobj.onclick=function(){
+			if(b){
+			timer=setInterval(function(){
+				num++;
+				h=parseInt(num/360000);
+				m=parseInt(num/6000)%60;
+				s=parseInt(num/100)%60;
+				mm=num%100;
+				imgarr[1].src='img/'+parseInt(h/10)+".png";
+				imgarr[2].src='img/'+parseInt(h%10)+".png";
+				imgarr[3].src='img/'+parseInt(m/10)+".png";
+				imgarr[4].src='img/'+parseInt(m%10)+".png";
+				imgarr[5].src='img/'+parseInt(s/10)+".png";
+				imgarr[6].src='img/'+parseInt(s%10)+".png";
+				imgarr[7].src='img/'+parseInt(mm/10)+".png";
+				imgarr[8].src='img/'+parseInt(mm%10)+".png";
+				b=false;
+				reobj.disabled=true;
+				// resetobj.onclick=null;
+			},10)	
+			}
+		}
+		stopobj.onclick=function(){
+			clearInterval(timer);
+			b=true;
+			reobj.disabled=false;
+		}
+		reobj.onclick=function(){
+			if(b){
+				num=0;
+				for(var j=1;j<=8;j++){
+					imgarr[j].src='img/'+0+'.png';
+				}	
+			}
+		}
+	</script>
+</html>
